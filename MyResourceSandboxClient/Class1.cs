@@ -83,10 +83,20 @@ namespace MyResourceSandboxClient
                 TriggerEvent("chat:addMessage", new
                 {
                     color = new[] { 255, 0, 0 },
-                    args = new[] { "[CarSpawner", $"Woohoo! Enjoy your new ^*{model}!" }
+                    args = new[] { "[CarSpawner", $"Congrats! Enjoy your new ^*{model}!" }
                 });
 
             }), false);
+
+            //Create Ped that will be stationary and sell things
+            RegisterCommand("salesman", new Action<int, List<object>, string>((source, args, raw) =>
+           {
+               //var pedType = (int)PedHash.Dealer01SMY;
+               var pedModel = (uint)GetHashKey("ig_money");
+               var pedPos = GetEntityCoords(PlayerPedId(), true);
+               CreatePed(5, pedModel, pedPos.X, pedPos.Y, pedPos.Z, 15, false, true);
+
+           }), false);
         }
     }
 }
