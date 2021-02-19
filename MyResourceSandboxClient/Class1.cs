@@ -93,7 +93,8 @@ namespace MyResourceSandboxClient
            {
                var pedPos = GetEntityCoords(PlayerPedId(), true);
                //Spawn NPC
-               Ped dealerPed = await World.CreatePed(PedHash.Bankman, new Vector3(pedPos.X, pedPos.Y, pedPos.Z));
+                Ped salesmanPed= await World.CreatePed(PedHash.Bankman, new Vector3(pedPos.X, pedPos.Y, pedPos.Z));
+               FreezeEntityPosition(salesmanPed.player, true);
 
            }), false);
         }
