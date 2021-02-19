@@ -89,12 +89,10 @@ namespace MyResourceSandboxClient
             }), false);
 
             //Create Ped that will be stationary and sell things
-            RegisterCommand("salesman", new Action<int, List<object>, string>((source, args, raw) =>
+            RegisterCommand("salesman", new Action<int, List<object>, string>(async (source, args, raw) =>
            {
-               //var pedType = (int)PedHash.Dealer01SMY;
-               var pedModel = (uint)GetHashKey("ig_money");
-               var pedPos = GetEntityCoords(PlayerPedId(), true);
-               CreatePed(5, pedModel, pedPos.X, pedPos.Y, pedPos.Z, 15, false, true);
+               //Spawn NPC
+               Ped dealerPed = await World.CreatePed(PedHash.Bankman, new Vector3(pedPos.X, pedPos.Y, pedPos.Z));
 
            }), false);
         }
