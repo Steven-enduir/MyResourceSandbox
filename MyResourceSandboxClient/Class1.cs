@@ -91,6 +91,7 @@ namespace MyResourceSandboxClient
             //Create Ped that will be stationary and sell things
             RegisterCommand("salesman", new Action<int, List<object>, string>(async (source, args, raw) =>
            {
+               var pedPos = GetEntityCoords(PlayerPedId(), true);
                //Spawn NPC
                Ped dealerPed = await World.CreatePed(PedHash.Bankman, new Vector3(pedPos.X, pedPos.Y, pedPos.Z));
 
