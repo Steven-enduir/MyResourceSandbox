@@ -94,9 +94,22 @@ namespace MyResourceSandboxClient
                var pedPos = GetEntityCoords(PlayerPedId(), true);
                //Spawn NPC
                 Ped salesmanPed= await World.CreatePed(PedHash.Bankman, new Vector3(pedPos.X, pedPos.Y, pedPos.Z));
-               FreezeEntityPosition(salesmanPed.NetworkId, true);
+               //FreezeEntityPosition(salesmanPed.NetworkId, true);
+               //SetEntityInvincible(salesmanPed.NetworkId, true);
 
            }), false);
+
+            //Spawn Taxi driver that will drive you to your waypoint
+            RegisterCommand("taxi", new Action<int, List<object>, string>(async (source, args, raw) =>
+            {
+                var hash = (uint)GetHashKey(model);
+                var pedPos = GetEntityCoords(PlayerPedId(), true);
+                Ped taxiDriver = await World.CreatePed(PedHash.Bankman, new Vector3(pedPos.X, pedPos.Y, pedPos.Z));
+
+                var vehicle = await World.CreateVehicle("taxi", Game.PlayerPed.Position, Game.PlayerPed.Heading);
+                Ped TaxiDriver1 = CreatePedInsideVehicle(vehicle, 1, (uint)GetHashKey("taxi"), -1, true, true);
+
+            }), false);
         }
     }
 }
